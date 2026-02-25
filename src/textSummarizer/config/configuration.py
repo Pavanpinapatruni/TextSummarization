@@ -1,6 +1,10 @@
 from textSummarizer.constants import *
 from textSummarizer.utils.common import read_yaml, create_directories
-from textSummarizer.entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
+from textSummarizer.entity import (DataIngestionConfig,
+                                   DataTransformationConfig,
+                                   DataValidationConfig,
+                                   ModelTrainerConfig)
+
 
 class ConfigurationManager:
     def __init__(
@@ -51,3 +55,25 @@ class ConfigurationManager:
             tokenizer_name = data_transformation_config.tokenizer_name
         )
         return data_transformation_config
+    
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        model_trainer_config = self.config.model_trainer
+
+        create_directories([model_trainer_config.root_dir])
+
+        model_trainer_config = ModelTrainerConfig(
+            root_dir = Path(model_trainer_config.root_dir),
+            data_path = Path(model_trainer_config.data_path),
+            model_ckpt = model_trainer_config.model_ckpt,
+            num_train_epochs = self.params.TrainingArguments.num_train_epochs,
+            warmup_steps = self.params.TrainingArguments.warmup_steps,
+            per_device_train_batch_size = self.params.TrainingArguments.per_device_train_batch_size,
+            weight_decay = self.params.TrainingArguments.weight_decay,
+            logging_steps = self.params.TrainingArguments.logging_steps,
+            evaluation_strategy = self.params.TrainingArguments.evaluation_strategy,
+            eval_steps = self.params.TrainingArguments.eval_steps,
+            save_steps = self.params.TrainingArguments.save_steps,
+            gradient_accumulation_steps = self.params.TrainingArguments.gradient_accumulation_steps
+        )
+
+        return model_trainer_config
