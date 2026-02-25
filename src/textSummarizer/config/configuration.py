@@ -70,7 +70,7 @@ class ConfigurationManager:
             per_device_train_batch_size = self.params.TrainingArguments.per_device_train_batch_size,
             weight_decay = self.params.TrainingArguments.weight_decay,
             logging_steps = self.params.TrainingArguments.logging_steps,
-            evaluation_strategy = self.params.TrainingArguments.evaluation_strategy,
+            eval_strategy = self.params.TrainingArguments.eval_strategy,
             eval_steps = self.params.TrainingArguments.eval_steps,
             save_steps = self.params.TrainingArguments.save_steps,
             gradient_accumulation_steps = self.params.TrainingArguments.gradient_accumulation_steps
