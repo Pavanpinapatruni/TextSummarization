@@ -20,3 +20,10 @@ model_trainer:
   root_dir: artifacts/model_trainer
   data_path: artifacts/data_transformation/transformed_dataset  # We take this dataset as input for our model training step.
   model_ckpt: google/pegasus-cnn_dailymail    # This the final model checkpoint we will be using for our model training.
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  data_path: artifacts/data_transformation/transformed_dataset  # We take this dataset as input for our model evaluation step.
+  model_path: artifacts/model_trainer/pegasus-samsum-model  # We take this model as input for our model evaluation step.
+  tokenizer_path: artifacts/model_trainer/tokenizer  # We take this tokenizer as input for our model evaluation step.
+  metric_file_name: artifacts/model_evaluation/metrics.csv
